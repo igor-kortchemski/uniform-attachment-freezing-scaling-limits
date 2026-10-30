@@ -31,7 +31,24 @@ jobs:
         with:
           auto-config: false
           build: true
-      - name: Install Comparator sandbox
-        run: sudo apt-get update && sudo apt-get install -y bubblewrap
+      # Ubuntu 24.04 restricts unprivileged user namespaces through AppArmor, so
+      # the distribution's bwrap fails ("setting up uid map: Permission denied").
+      # Palomar's pinned installer builds bubblewrap 0.12.0 and loads a profile
+      # granting only `userns` to that binary.
+      - name: Build the pinned Palomar sandbox
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq meson ninja-build libcap-dev pkg-config apparmor
+          curl --fail --location --silent --show-error --proto '=https' --tlsv1.2 \
+            --retry 3 --output "$RUNNER_TEMP/install_bwrap.sh" \
+            https://raw.githubusercontent.com/PalomarRegistry/PalomarSubmission/14aa8d6b3c2f14a8540605e37144560b9a00e7e7/scripts/install_bwrap.sh
+          printf '%s  %s\n' c290df6cebdf1cb26edb69ed4164d9551062bfeb65243b93d1d1d3b77eac0a35 \
+            "$RUNNER_TEMP/install_bwrap.sh" | sha256sum --check --quiet
+          comparator_bwrap=$(bash "$RUNNER_TEMP/install_bwrap.sh" "$RUNNER_TEMP/bwrap-bin")
+          echo "$RUNNER_TEMP/bwrap-bin" >> "$GITHUB_PATH"
+          echo "COMPARATOR_BWRAP=$comparator_bwrap" >> "$GITHUB_ENV"
+          "$comparator_bwrap" --unshare-all --new-session --die-with-parent \
+            --ro-bind / / --proc /proc --dev /dev -- /usr/bin/true
       - name: Compare Challenge and Solution
         run: lake comparator --config comparator.json
