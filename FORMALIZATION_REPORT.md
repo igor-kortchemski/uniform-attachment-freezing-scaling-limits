@@ -374,8 +374,11 @@ maintained modules** (only `propext`, `Classical.choice`, `Quot.sound`), the
 Challenge copy check, and a preliminary **unsandboxed** local Comparator run that
 accepted the solution. See [publication-candidate-axioms.log](evidence/publication-candidate-axioms.log),
 [context and hashes](evidence/publication-candidate-context.txt) and
-[comparator output](evidence/comparator-local-unsandboxed.txt). No sandboxed
-Comparator run, Palomar preflight, submission or registration has taken place.
+[comparator output](evidence/comparator-local-unsandboxed.txt). In GitHub CI
+([run 41033233038](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41033233038),
+commit `41aa125`) the same checks passed and the **sandboxed** Comparator
+accepted the solution ([record](evidence/comparator-ci-sandboxed.txt)). No
+Palomar preflight, submission or registration has taken place.
 
 The previous checkpoint, after U01's second clause (uniform plane tree) and the
 model facts U06, U29 (normalization) and U20 ($L^p$ height), ran the default

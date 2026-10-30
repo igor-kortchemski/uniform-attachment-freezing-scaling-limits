@@ -1,7 +1,8 @@
 # Publication readiness
 
-Status on 30 October 2026: **local publication candidate prepared; not yet
-pushed, sandboxed-compared or submitted.**
+Status on 30 October 2026: **pushed to a private GitHub repository; CI and
+the sandboxed Comparator pass. Not yet public, Palomar-preflighted or
+submitted.**
 
 ## Decisions recorded (from the user, 30 October 2026)
 
@@ -43,6 +44,18 @@ pushed, sandboxed-compared or submitted.**
   trustworthy Comparator certificate.
 - Hashes: [publication-candidate-context.txt](../evidence/publication-candidate-context.txt).
 
+## Evidence (GitHub CI)
+
+- [Run 41033233038](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41033233038)
+  on commit `41aa125`: the `build` job (build, axiom check, Challenge check) and
+  the `comparator` job both passed. The **sandboxed** Comparator, with
+  bubblewrap 0.12.0 built by Palomar's pinned `install_bwrap.sh`, accepted the
+  solution ([record](../evidence/comparator-ci-sandboxed.txt)).
+- The first run failed before comparing anything: the distribution's `bwrap`
+  cannot create user namespaces on Ubuntu 24.04 runners. `ci.yml` now uses
+  Palomar's installer, which loads an AppArmor profile for its own binary.
+- This is a standalone Comparator check, not the Palomar full preflight.
+
 ## Policy checked (30 October 2026)
 
 - [toolchains.json](https://raw.githubusercontent.com/PalomarRegistry/PalomarSubmission/main/toolchains.json):
@@ -54,8 +67,8 @@ pushed, sandboxed-compared or submitted.**
 
 ## Remaining steps (each needs the user's go-ahead)
 
-1. Push the commit to the private repository; let CI run the sandboxed
-   Comparator and inspect the result.
+1. Done: pushed to the private repository; CI and the sandboxed Comparator
+   pass.
 2. Make the repository public.
 3. Refresh the Palomar pipeline commit pinned in `palomar.yml`, dispatch the
    full preflight on the exact public commit, and inspect its report.

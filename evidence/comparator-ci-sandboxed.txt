@@ -1,0 +1,41 @@
+Sandboxed Comparator run in GitHub Actions (30 October 2026)
+Run: https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41033233038
+Event: push to main; source commit 41aa1253e25093ab5e6ce301c99991df8b7cc4a4
+Workflow: .github/workflows/ci.yml, jobs "build" and "comparator"; both succeeded
+Runner: ubuntu-24.04 (image 20261025.353.1); Lean 4.35.0 (x86_64-unknown-linux-gnu)
+Sandbox: bubblewrap 0.12.0, built by PalomarRegistry/PalomarSubmission
+  scripts/install_bwrap.sh at 14aa8d6b3c2f14a8540605e37144560b9a00e7e7
+  (SHA-256 c290df6cebdf1cb26edb69ed4164d9551062bfeb65243b93d1d1d3b77eac0a35),
+  with the AppArmor profile that grants it user namespaces; a smoke test of
+  the sandbox passed before the comparison.
+Configuration: comparator.json (5 theorems, definition_names [], permitted
+  axioms propext, Classical.choice, Quot.sound)
+Status: accepted ("Your solution is okay!"); the sandbox was enabled.
+This is a standalone Comparator check, not the Palomar full preflight, and
+nothing was submitted or registered.
+
+Recorded output of the comparison step (abridged by the run's author: the
+repeated warnings and the exported constant lists are elided):
+  lake comparator --config comparator.json
+  env: COMPARATOR_BWRAP=/home/runner/work/_temp/bwrap-bin/bwrap
+  Resolving dependencies
+  Building Challenge
+  warning: Challenge.lean:342:8: declaration uses `sorry`   (also 358, 382, 409, 421)
+  Build completed successfully (3097 jobs).
+  Exporting #[... FreezingStatements.height_scaling_limit, FreezingStatements.subcritical_scaling_limit,
+    FreezingStatements.critical_scaling_limit, FreezingStatements.supercritical_distance_matrix_limit,
+    FreezingStatements.bounded_population_GH_limit, propext, Classical.choice, Quot.sound, ...] from Challenge
+  Building Solution
+  Build completed successfully (4174 jobs).
+  Exporting #[...same list...] from Solution
+  Running Lean default kernel on solution
+  Lean default kernel accepts the solution
+  Your solution is okay!
+
+The "build" job of the same run: lake build 4,177 jobs (only the five
+Challenge sorry warnings); scripts/check_axioms.py PASS for 3,724
+definitions/theorems in 289 modules (only Classical.choice, Quot.sound,
+propext); scripts/check_challenge.py OK.
+
+Both jobs warned that saving the Lean build cache failed (the runner ran out of
+disk while compressing it); this affects only caching, not the results.

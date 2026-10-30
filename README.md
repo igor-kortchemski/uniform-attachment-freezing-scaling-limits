@@ -134,8 +134,12 @@ Local evidence for the current candidate
 4,177 jobs; the axiom check passed for 3,724 definitions and theorems in all
 289 modules ([log](evidence/publication-candidate-axioms.log)); the Challenge
 check passed; and a **preliminary, unsandboxed** local Comparator run accepted
-the solution ([output](evidence/comparator-local-unsandboxed.txt)). The
-sandboxed Comparator run happens in CI once the repository is on GitHub; no
+the solution ([output](evidence/comparator-local-unsandboxed.txt)).
+
+In CI on GitHub ([run 41033233038](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41033233038),
+commit `41aa125`), the build, axiom and Challenge checks passed again, and the
+**sandboxed** Comparator (bubblewrap 0.12.0, built by Palomar's pinned installer)
+accepted the solution ([record](evidence/comparator-ci-sandboxed.txt)). No
 Palomar preflight, submission or registration has taken place.
 
 ## Source, citation, and contribution
