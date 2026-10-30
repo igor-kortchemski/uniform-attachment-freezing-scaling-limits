@@ -1,0 +1,15 @@
+Uniform attachment with freezing — Lean formalization
+Copyright 2026 Igor Kortchemski
+
+The original Lean code and project documentation are licensed under Apache-2.0.
+This work was developed with Codex and collaborating automated proof/audit agents.
+No human review or endorsement is asserted by the automated verification evidence.
+
+Mathematical source: Uniform attachment with freezing, by Étienne Bellin,
+Arthur Blanc-Renaudie, Emmanuel Kammerer, and Igor Kortchemski.
+The supplied manuscript attachement-uniforme-1-final.tex retains its own rights;
+the code license does not relicense the manuscript, figures, or cited works.
+
+The local workflow skills under .agents retain their notices and licenses in
+.agents/skill-notices/lean-palomar-skills-updated/. Mathlib and other dependencies
+retain the licenses in their respective repositories.

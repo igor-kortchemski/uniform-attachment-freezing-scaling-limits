@@ -1,0 +1,25 @@
+Local PRELIMINARY Comparator run on the publication candidate (30 October 2026)
+Command: lake comparator --inadvisably-no-sandbox   (macOS; bwrap unavailable)
+Configuration: comparator.json (5 theorems, definition_names [], permitted axioms propext, Classical.choice, Quot.sound)
+Status: accepted ("Your solution is okay!", exit 0).
+WARNING: the sandbox was disabled, so this run is NOT trustworthy as a Comparator
+certificate and is NOT a Palomar verification. The sandboxed check runs in the
+GitHub workflow .github/workflows/ci.yml (job "comparator") once the repository
+is on GitHub; Palomar's full preflight is .github/workflows/palomar.yml.
+
+Recorded output (abridged by the run's author: repeated warnings and the
+exported constant lists are elided):
+  WARNING: Sandbox disabled, this run is not trustworthy.
+  Resolving dependencies
+  Building Challenge
+  warning: Challenge.lean:342:8: declaration uses `sorry`   (also 358, 382, 409, 421)
+  Build completed successfully (3097 jobs).
+  Exporting #[... FreezingStatements.height_scaling_limit, FreezingStatements.subcritical_scaling_limit,
+    FreezingStatements.critical_scaling_limit, FreezingStatements.supercritical_distance_matrix_limit,
+    FreezingStatements.bounded_population_GH_limit, propext, Classical.choice, Quot.sound, ...] from Challenge
+  Building Solution
+  Build completed successfully (4174 jobs).
+  Exporting #[...same list...] from Solution
+  Running Lean default kernel on solution
+  Lean default kernel accepts the solution
+  Your solution is okay!

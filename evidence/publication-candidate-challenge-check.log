@@ -1,0 +1,4 @@
+Challenge theorems: height_scaling_limit, subcritical_scaling_limit, critical_scaling_limit, supercritical_distance_matrix_limit, bounded_population_GH_limit
+Challenge.lean: 429 lines, 21668 bytes (21.2 KiB)
+OK: Challenge.lean contains a verbatim copy of the shared definitions of Freezing2/Interface/Defs.lean and satisfies the checked constraints.
+CHALLENGE EXIT 0

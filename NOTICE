@@ -1,0 +1,22 @@
+Uniform attachment with freezing: Scaling limits — Lean formalization
+Copyright 2026 Igor Kortchemski
+
+The original Lean code and project documentation are licensed under Apache-2.0.
+This work was developed with Codex and Claude automated proof and statement-audit
+agents. No human review or endorsement is asserted by the automated verification
+evidence.
+
+Mathematical source: Uniform attachment with freezing: Scaling limits, by Étienne
+Bellin, Arthur Blanc-Renaudie, Emmanuel Kammerer, and Igor Kortchemski
+(arXiv:2308.00484; Ann. Inst. H. Poincaré Probab. Statist. 61(4) 2679–2708
+(2025), doi:10.1214/24-AIHP1497). The
+supplied manuscript attachement-uniforme-2-final.tex retains its own rights; the
+code license does not relicense the manuscript, figures, or cited works.
+
+The modules under Freezing2/Companion are adapted from the companion Lean
+formalization of "Uniform attachment with freezing" by the same contributor,
+under the same license; see docs/companion-provenance.md.
+
+The local workflow skills under .agents retain their notices and licenses in
+.agents/skill-notices/. Mathlib and other dependencies retain the licenses in
+their respective repositories.

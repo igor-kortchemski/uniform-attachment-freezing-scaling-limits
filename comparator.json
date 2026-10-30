@@ -1,0 +1,17 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "FreezingStatements.height_scaling_limit",
+    "FreezingStatements.subcritical_scaling_limit",
+    "FreezingStatements.critical_scaling_limit",
+    "FreezingStatements.supercritical_distance_matrix_limit",
+    "FreezingStatements.bounded_population_GH_limit"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ]
+}

@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          auto-config: false
+          build: true
+      - name: Inspect transitive axioms of every maintained module
+        run: python3 scripts/check_axioms.py
+      - name: Check that Challenge copies the interface definitions verbatim
+        run: python3 scripts/check_challenge.py
+
+  comparator:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          auto-config: false
+          build: true
+      - name: Install Comparator sandbox
+        run: sudo apt-get update && sudo apt-get install -y bubblewrap
+      - name: Compare Challenge and Solution
+        run: lake comparator --config comparator.json

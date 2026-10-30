@@ -1,0 +1,182 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: v0.4
+project:
+  name: "Uniform attachment with freezing: Scaling limits — Lean formalization"
+  description: >-
+    A Lean 4 and Mathlib formalization of arXiv:2308.00484, "Uniform attachment
+    with freezing: Scaling limits", published in Ann. Inst. H. Poincaré Probab.
+    Statist. 61(4) 2679–2708 (2025). It proves the Introduction's height theorem, the
+    subcritical Gromov–Hausdorff–Prokhorov (GHP) limit to a measured segment, the
+    critical GHP limit to a random compact measured real tree T(f) together with
+    its geometric properties (leaves carry the mass; binary if and only if the
+    reciprocal-square integral diverges; root condensation otherwise), and the
+    supercritical distance-matrix limit in its corrected zero-diagonal form. All
+    numbered intermediate results are proved, several in corrected or qualified
+    forms. The CRT corollary (cor:CRT) is not formalized. Height and
+    forward-tree modules are adapted from the companion formalization of
+    "Uniform attachment with freezing" by the same contributor (not yet public;
+    see docs/companion-provenance.md).
+  authors: [Igor Kortchemski]
+  responsible_maintainers: [Igor Kortchemski]
+  license: Apache-2.0
+classification:
+  arxiv: [math.PR, math.CO]
+  msc2020: [60C05, 05C80, 60F05, 60J80]
+sources:
+  - title: "Uniform attachment with freezing: Scaling limits"
+    authors: [Étienne Bellin, Arthur Blanc-Renaudie, Emmanuel Kammerer, Igor Kortchemski]
+    type: article
+    relationship: formalizes
+    id: "doi:10.1214/24-AIHP1497"
+    location: >-
+      Ann. Inst. Henri Poincaré Probab. Stat. 61(4) (2025) 2679–2708;
+      arXiv:2308.00484. Audited text: attachement-uniforme-2-final.tex (1921
+      lines, sha256 23a485d5a5dfaca01a05db28377d015fb1456c194a543d0cbf56f77619ad0cbf).
+    license: unknown
+    note: >-
+      The source is unchanged. The full inventory (docs/source-inventory.md),
+      locators, false or ambiguous printed assertions and their corrections are
+      recorded in FORMALIZATION_REPORT.md. The code license does not relicense
+      the manuscript.
+related_formalizations: []
+status:
+  scope: >-
+    Advertised: the Introduction results M01 (thm:heightalpha), M02
+    (thm:sous-critique), M03 (thm:critique) with M04 (thm:properties), and M06
+    (thm:sur-critique) in the user-approved corrected form with zero diagonal,
+    plus N09 (thm:alpha0), as stated in Challenge.lean (deliberate sorry
+    placeholders only there; sorry_count counts the proof library and Solution)
+    and compared by comparator.json. The library also
+    proves every numbered result N01–N17 and most unnumbered claims, some in
+    corrected or qualified forms (see FORMALIZATION_REPORT.md). Excluded by the
+    user's decision: the CRT corollary M05 (cor:CRT), which needs Brownian
+    excursion and CRT theory, invariance principles, Skorokhod representation
+    and random-walk local limit theorems absent from Mathlib. Also open: the
+    dimension lower bounds (no proof in the source), long-dendron convergence,
+    and Aldous's time change. No whole-paper completion is claimed.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Classical.choice, Quot.sound]
+  main_results:
+    - declaration: FreezingStatements.height_scaling_limit
+      file: Freezing2/Interface/Statements.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
+    - declaration: FreezingStatements.subcritical_scaling_limit
+      file: Freezing2/Interface/Statements.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
+    - declaration: FreezingStatements.critical_scaling_limit
+      file: Freezing2/Interface/Statements.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
+    - declaration: FreezingStatements.supercritical_distance_matrix_limit
+      file: Freezing2/Interface/Statements.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
+    - declaration: FreezingStatements.bounded_population_GH_limit
+      file: Freezing2/Interface/Statements.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
+automation:
+  methods:
+    - method: agent
+      models: []
+      framework: Codex and Claude Code
+      tool_setup: >-
+        Local Lean and Mathlib, source-file search, parallel proof agents, and
+        separate automated statement-fidelity reviewers. Model build identifiers
+        are not recorded. No native-evaluation axioms are used.
+      cost:
+        wall_time: not tracked
+        spend_usd: not tracked
+        hardware: local macOS machine
+      prompting_notes: >-
+        Formalize every named and substantive assertion of the paper,
+        prioritize Introduction results, preserve unresolved obligations, record
+        corrections, and audit source fidelity with independent reviewers.
+  spend_usd: not tracked
+  notes: >-
+    The user selected Apache-2.0, Igor Kortchemski as contributor and responsible
+    maintainer, deliberate sorry placeholders in Challenge.lean only, and the
+    exclusion of M05 from the advertised scope. GitHub repository:
+    igor-kortchemski/uniform-attachment-freezing-scaling-limits.
+fidelity:
+  divergences: >-
+    See FORMALIZATION_REPORT.md for the full list. Highlights: M06 uses the
+    zero-diagonal correction of the printed matrix (approved by the user); the
+    critical limit is characterized through its finite-dimensional laws and full
+    support rather than built by the paper's edge construction, and its
+    real-tree property is proved through the four-point condition and midpoints;
+    several intermediate statements are proved in corrected forms (N04 distinct
+    vertices, N13 repaired constants, N14 positive indices, N12a corrected
+    tracked-chain form); N11 uses a documented root-ordering interpretation
+    (S09); M04's distinguished root is identified only up to the unpointed GHP
+    encoding. Proof routes often differ from the paper (tracked connectivity
+    chain and matrix exponentials for the finite-dimensional limits, empirical
+    reconstruction for identification), and are recorded in the report.
+review:
+  status: independent automated statement audits; no human mathematical review claimed
+  reviewers: [Codex and Claude statement-audit agents]
+  notes: >-
+    Each advertised statement and its definitions were reviewed against the
+    source by a separate agent that did not write it (docs/milestone-audit.md).
+    The Challenge interface is reviewed separately (see docs/statement-interface.md).
+alignment:
+  namespace: FreezingStatements
+  statements:
+    - source: "thm:heightalpha (Introduction)"
+      lean: FreezingStatements.height_scaling_limit
+      module: Freezing2.Interface.Statements
+      status: proved
+      note: >-
+        L^p height limit for 0 < alpha < 1; library theorem
+        height_scaling_limit_positive_horizons. The unneeded local square
+        hypothesis is dropped, so the statement is stronger than the source.
+    - source: "thm:sous-critique (Introduction)"
+      lean: FreezingStatements.subcritical_scaling_limit
+      module: Freezing2.Interface.Statements
+      status: proved
+      note: >-
+        GHP convergence in distribution to the measured segment; library theorem
+        subcritical_scaling_limit.
+    - source: "thm:critique and thm:properties (Introduction)"
+      lean: FreezingStatements.critical_scaling_limit
+      module: Freezing2.Interface.Statements
+      status: proved
+      note: >-
+        Existence of a limit law T(f) depending only on f, GHP convergence, and
+        almost surely: full support, real tree, leaves carry the mass, binary iff
+        the reciprocal-square integral diverges, root condensation otherwise.
+        Library theorems critical_scaling_limit_realTree and
+        critical_tree_properties. The topology is on compact measured spaces, not
+        isometry classes; the source's "root of degree one" remark is not stated.
+    - source: "thm:sur-critique (Introduction), corrected"
+      lean: FreezingStatements.supercritical_distance_matrix_limit
+      module: Freezing2.Interface.Statements
+      status: proved
+      note: >-
+        Root-inclusive sampled distance matrix limit with the zero diagonal
+        correction approved by the user; holds for every k.
+    - source: "thm:alpha0"
+      lean: FreezingStatements.bounded_population_GH_limit
+      module: Freezing2.Interface.Statements
+      status: proved
+      note: GH convergence in probability to [0,1] under bounded population.
+    - source: "cor:CRT (Introduction)"
+      lean: none
+      module: none
+      status: not formalized
+      note: >-
+        Excluded by the user's decision; needs Brownian excursion, CRT and
+        invariance-principle theory absent from Mathlib. Two printed estimates of
+        its proof (S15, S16) are refuted in Freezing2.Audit.ExcursionCounterexamples.
+acknowledgements: >-
+  Lean, Mathlib and their contributors; source-paper authors; Codex and Claude
+  proof and audit assistance. Local workflow skills retain their bundled
+  attribution.

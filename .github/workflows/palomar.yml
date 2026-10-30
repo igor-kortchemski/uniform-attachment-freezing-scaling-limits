@@ -1,0 +1,29 @@
+name: Palomar full mechanical preflight
+
+# Dispatch only after the intended snapshot is public, and refresh the pinned
+# pipeline commit against the current Palomar policy first. This workflow does
+# not submit or register a result; inspect its mechanical-report.json afterwards.
+on:
+  workflow_dispatch:
+    inputs:
+      authorization_relationship:
+        description: "Truthful relationship to the formalization (recorded in the report)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: ${{ !github.event.repository.private }}
+    uses: PalomarRegistry/PalomarSubmission/.github/workflows/submission.yml@14aa8d6b3c2f14a8540605e37144560b9a00e7e7
+    with:
+      repository: ${{ github.repository }}
+      commit: ${{ github.sha }}
+      pipeline_commit: 14aa8d6b3c2f14a8540605e37144560b9a00e7e7
+      request_id: freezing0002
+      mode: full
+      execution_profile: palomar-standard-v1
+      options: >-
+        {"comparator_config_path":"comparator.json","authorization_relationship":${{ toJSON(inputs.authorization_relationship) }}}

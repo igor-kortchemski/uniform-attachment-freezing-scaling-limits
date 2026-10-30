@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "Cite the source paper for its mathematical results; this citation identifies the Lean formalization."
+title: "Uniform attachment with freezing: Scaling limits — Lean formalization"
+type: software
+authors:
+  - family-names: Kortchemski
+    given-names: Igor
+license: Apache-2.0
+abstract: >-
+  A Lean 4 and Mathlib formalization of the scaling-limit results of "Uniform
+  attachment with freezing: Scaling limits": the height theorem, the subcritical
+  GHP limit, the critical limit as a random compact real tree with its geometric
+  properties, and the (corrected) supercritical distance-matrix limit, together
+  with the numbered intermediate results. The CRT corollary is not formalized.
+  FORMALIZATION_REPORT.md records the exact scope, corrections and remaining
+  obligations. Developed with automated proof and statement-audit assistance.
+preferred-citation:
+  type: article
+  title: "Uniform attachment with freezing: Scaling limits"
+  authors:
+    - family-names: Bellin
+      given-names: Étienne
+    - family-names: Blanc-Renaudie
+      given-names: Arthur
+    - family-names: Kammerer
+      given-names: Emmanuel
+    - family-names: Kortchemski
+      given-names: Igor
+  journal: "Annales de l'Institut Henri Poincaré, Probabilités et Statistiques"
+  volume: 61
+  issue: 4
+  start: 2679
+  end: 2708
+  year: 2025
+  doi: "10.1214/24-AIHP1497"
+  url: "https://arxiv.org/abs/2308.00484"

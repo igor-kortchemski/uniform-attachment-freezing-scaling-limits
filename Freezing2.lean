@@ -1,0 +1,295 @@
+module
+
+public import Freezing2.Discrete.Walk
+public import Freezing2.Discrete.Labels
+public import Freezing2.Discrete.WeightedWalk
+public import Freezing2.Discrete.Estimates
+public import Freezing2.Analysis.BennettFunction
+public import Freezing2.Analysis.ExponentialDecay
+public import Freezing2.Analysis.PopulationProfile
+public import Freezing2.Analysis.LocalL1
+public import Freezing2.Analysis.ReciprocalCorrection
+public import Freezing2.Analysis.StepProfile
+public import Freezing2.Analysis.ProfileIntegrals
+public import Freezing2.Analysis.SublinearPopulation
+public import Freezing2.Analysis.SourceHypotheses
+public import Freezing2.Analysis.SignCounts
+public import Freezing2.Analysis.IntervalWeakConvergence
+public import Freezing2.Analysis.SignMeasures
+public import Freezing2.Analysis.ProfileCorrection
+public import Freezing2.Analysis.HarmonicAsymptotics
+public import Freezing2.Analysis.HarmonicConclusions
+public import Freezing2.Analysis.SmallSetL1
+public import Freezing2.Analysis.SquareL1
+public import Freezing2.Analysis.LocalSquareProfiles
+public import Freezing2.Analysis.PopulationMinimum
+public import Freezing2.Analysis.InteriorMinimum
+public import Freezing2.Analysis.InteriorMinimumLimit
+public import Freezing2.Analysis.MeshIntervals
+public import Freezing2.Discrete.CoalescenceEstimates
+public import Freezing2.Analysis.SquareCorrection
+public import Freezing2.Analysis.LocalCoalescenceIntegrals
+public import Freezing2.Analysis.UniformSmallIntervals
+public import Freezing2.Analysis.CoalescenceLimit
+public import Freezing2.Analysis.PopulationLemma
+public import Freezing2.Analysis.LpScaling
+public import Freezing2.Analysis.HeightNormalization
+public import Freezing2.Probability.CompanionModel
+public import Freezing2.MainResults.Height
+public import Freezing2.Companion.ReverseForest
+public import Freezing2.Probability.BirthTimeLimit
+public import Freezing2.Probability.VertexSampling
+public import Freezing2.Probability.ReverseLabelBridge
+public import Freezing2.Probability.ConditionalBernoulli
+public import Freezing2.Analysis.HeightConcentrationRate
+public import Freezing2.Probability.UniformHeightConcentration
+public import Freezing2.Probability.HeightApproximation
+public import Freezing2.Analysis.SubcriticalCoalescence
+public import Freezing2.Probability.ReverseHistory
+public import Freezing2.Probability.ReverseConditional
+public import Freezing2.Probability.CoalescenceTransition
+public import Freezing2.Discrete.ForestDistances
+public import Freezing2.Companion.ReverseStampedForest
+public import Freezing2.Probability.ForestGeometry
+public import Freezing2.Probability.ReverseHeightLaw
+public import Freezing2.Probability.ReverseHeightConcentration
+public import Freezing2.Probability.ReverseObservations
+public import Freezing2.Probability.ReverseLegalSteps
+public import Freezing2.Probability.ReversePaper
+public import Freezing2.Probability.ReverseUniformVertex
+public import Freezing2.Probability.CoalescenceHistory
+public import Freezing2.Companion.ReverseTimestampSupport
+public import Freezing2.Analysis.SupercriticalCoalescence
+public import Freezing2.Probability.ProductEventBound
+public import Freezing2.Probability.SubcriticalCoalescenceLaw
+public import Freezing2.Probability.DistanceApproximation
+public import Freezing2.Probability.SupercriticalCoalescenceLaw
+public import Freezing2.Analysis.ProfilePrimitive
+public import Freezing2.Discrete.HarmonicDistances
+public import Freezing2.Probability.ForwardHistoryLaw
+public import Freezing2.Probability.ReverseStampedTransition
+public import Freezing2.Analysis.SmallHarmonicIntervals
+public import Freezing2.Probability.ForwardHistoryUnique
+public import Freezing2.Probability.ForwardHistorySupport
+public import Freezing2.Probability.ForwardTerminalLaw
+public import Freezing2.Probability.ReverseChoiceHistory
+public import Freezing2.Probability.ReverseChoiceSupport
+public import Freezing2.Probability.ReverseChoiceUnique
+public import Freezing2.Probability.ReverseCanonicalOrder
+public import Freezing2.Probability.BranchLengthLimit
+public import Freezing2.Probability.WeakPerturbation
+public import Freezing2.Probability.SubcriticalDistanceApproximation
+public import Freezing2.Geometry.GraphMetric
+public import Freezing2.Probability.SubcriticalProfileApproximation
+public import Freezing2.Geometry.BirthDensity
+public import Freezing2.Geometry.ProfileSegment
+public import Freezing2.Geometry.ForestGH
+public import Freezing2.Probability.SubcriticalGHLimit
+public import Freezing2.Probability.SupercriticalDistanceApproximation
+public import Freezing2.Probability.SupercriticalMatrixApproximation
+public import Freezing2.Probability.ForwardReplay
+public import Freezing2.Probability.CanonicalForwardReplay
+public import Freezing2.Probability.ForwardReplayState
+public import Freezing2.Probability.CanonicalForwardGraph
+public import Freezing2.Probability.ReverseTerminalLaw
+public import Freezing2.Probability.ReverseOutsideSupport
+public import Freezing2.Probability.ActiveLabelPermutation
+public import Freezing2.Probability.ActivePermutationHistory
+public import Freezing2.Probability.StampedForestExt
+public import Freezing2.Probability.AtomicComparison
+public import Freezing2.Probability.FiniteFibreMass
+public import Freezing2.Probability.CanonicalPermutation
+public import Freezing2.Probability.ForwardReverseLaw
+public import Freezing2.Probability.RootedSampledMatrix
+public import Freezing2.Probability.ProkhorovBounds
+public import Freezing2.Geometry.MeasuredGluing
+public import Freezing2.Geometry.GromovHausdorffProkhorov
+public import Freezing2.Probability.SourceSameLaw
+public import Freezing2.Probability.ProfileCoordinateLaw
+public import Freezing2.Probability.UniformTransport
+public import Freezing2.Probability.SupercriticalDistanceLimit
+public import Freezing2.Probability.SupercriticalSourceMatrix
+public import Freezing2.Probability.CanonicalMetricTransport
+public import Freezing2.Probability.SampledTreeTransport
+public import Freezing2.Probability.SampledMatrixTransport
+public import Freezing2.MainResults.Supercritical
+public import Freezing2.Probability.ProfileForestMeasure
+public import Freezing2.Probability.SubcriticalGHPLimit
+public import Freezing2.Geometry.GHPTransport
+public import Freezing2.Geometry.CompactMeasuredSpace
+public import Freezing2.Probability.PointMassLimit
+public import Freezing2.Analysis.SupercriticalHazardRate
+public import Freezing2.Geometry.GHPTriangle
+public import Freezing2.Geometry.MeasuredGHSpace
+public import Freezing2.Geometry.TreeMeasuredSpaces
+public import Freezing2.Probability.ForwardGHPTransport
+public import Freezing2.MainResults.Subcritical
+public import Freezing2.MainResults.SubcriticalDistribution
+public import Freezing2.Analysis.FiniteSurvivalProducts
+public import Freezing2.Probability.CriticalSurvivalProduct
+public import Freezing2.Probability.CoalescenceMetric
+public import Freezing2.Probability.ProkhorovIsometry
+public import Freezing2.Geometry.GHPUnderlyingGH
+public import Freezing2.Geometry.ApproximateIsometryLimit
+public import Freezing2.Geometry.GHPSeparation
+public import Freezing2.Geometry.MeasuredGHMetric
+public import Freezing2.Geometry.GHPUnderlyingProjection
+public import Freezing2.Geometry.GHPFiniteApproximation
+public import Freezing2.Analysis.ProfileTimeChange
+public import Freezing2.Analysis.CoalescentCountRecurrence
+public import Freezing2.Probability.FiniteDistinctSampling
+public import Freezing2.Probability.DistinctVertexSampling
+public import Freezing2.Probability.FrozenDistinctSampling
+public import Freezing2.Probability.AuxiliarySignSampling
+public import Freezing2.Probability.ClusterTransition
+public import Freezing2.Probability.TrackedClusterCount
+public import Freezing2.Probability.TrackedClusterExpectation
+public import Freezing2.Probability.CoalescenceMetricApproximation
+public import Freezing2.Probability.CommonBirthTail
+public import Freezing2.Probability.FiniteProkhorov
+public import Freezing2.Geometry.GHPFiniteCoding
+public import Freezing2.Geometry.GHPSeparability
+public import Freezing2.Geometry.GHPChainGluing
+public import Freezing2.Geometry.GHPChainMeasures
+public import Freezing2.Geometry.CompactHausdorffHull
+public import Freezing2.Probability.CompactSupportLimit
+public import Freezing2.Geometry.GHPCompleteness
+public import Freezing2.Geometry.FiniteChaining
+public import Freezing2.Probability.CoalescenceChaining
+public import Freezing2.Analysis.ChainingSeries
+public import Freezing2.Probability.TrackedClusterBlock
+public import Freezing2.Probability.TrackedRootCorrespondence
+public import Freezing2.Probability.TrackedIsolation
+public import Freezing2.Probability.OldestIsolation
+public import Freezing2.Probability.OldestBlock
+public import Freezing2.Analysis.TightnessBlockArithmetic
+public import Freezing2.Probability.OneStepTightness
+public import Freezing2.Probability.OneStepTightnessAsymptotic
+public import Freezing2.Analysis.FiniteFamilyScheffe
+public import Freezing2.Analysis.VariableDominatedConvergence
+public import Freezing2.Probability.DominatedWeakConvergence
+public import Freezing2.Probability.MeshJitter
+public import Freezing2.Probability.FrozenBirthSampling
+public import Freezing2.Probability.LocalProfileInMeasure
+public import Freezing2.Probability.AuxiliarySignJitter
+public import Freezing2.Probability.FiniteOccupancy
+public import Freezing2.Geometry.GHPCompactness
+public import Freezing2.Probability.MarkedProfileSampling
+public import Freezing2.Probability.Bennett
+public import Freezing2.Audit.Obstructions
+public import Freezing2.Analysis.SuccessorSquareProfile
+public import Freezing2.Probability.AuxiliaryAttachmentRate
+public import Freezing2.Probability.AuxiliaryAttachmentSquare
+public import Freezing2.Analysis.CriticalOccupancyRate
+public import Freezing2.Probability.FrozenBlockOccupancy
+public import Freezing2.Probability.CriticalBlockOccupancy
+public import Freezing2.Probability.ReverseContinuation
+public import Freezing2.Probability.ContinuationCount
+public import Freezing2.Probability.ContinuationIsolation
+public import Freezing2.Probability.ContinuationConditional
+public import Freezing2.Probability.ContinuationBlockIsolation
+public import Freezing2.Probability.ConditionalBlockIsolation
+public import Freezing2.Probability.ConditionalEventBounds
+public import Freezing2.Probability.FiniteConditionalEventBounds
+public import Freezing2.Probability.ConditionalIsolationChain
+public import Freezing2.Probability.CriticalBlockGeometry
+public import Freezing2.Analysis.CriticalIsolationRate
+public import Freezing2.Analysis.CriticalBlockSchedule
+public import Freezing2.Analysis.CriticalBlockRadius
+public import Freezing2.Analysis.CriticalPopulationBound
+public import Freezing2.Probability.CriticalBlockCover
+public import Freezing2.Probability.CriticalSampledCover
+public import Freezing2.Probability.IidSequence
+public import Freezing2.Probability.CriticalChaining
+public import Freezing2.Probability.CriticalSampleNet
+public import Freezing2.Probability.CriticalGraphNet
+public import Freezing2.Probability.ForwardLeafTightness
+public import Freezing2.Probability.AnnealedSampling
+public import Freezing2.Geometry.GHCovering
+public import Freezing2.Probability.GHTightCriterion
+public import Freezing2.Probability.LeafTightTightness
+public import Freezing2.Probability.LeafTightLimits
+public import Freezing2.Geometry.RowSpace
+public import Freezing2.Probability.SampleDensity
+public import Freezing2.Probability.EmpiricalMeasure
+public import Freezing2.Probability.SampledReconstruction
+public import Freezing2.Probability.CriticalTreeBridge
+public import Freezing2.Probability.ReverseMarkovPath
+public import Freezing2.Probability.TrackedGenealogy
+public import Freezing2.Probability.TrackedChain
+public import Freezing2.Analysis.MatrixProductLimit
+public import Freezing2.Probability.TrackedChainLimit
+public import Freezing2.Probability.TrackedChainPath
+public import Freezing2.Probability.VertexQuantileCoupling
+public import Freezing2.Probability.CriticalGenealogyLimit
+public import Freezing2.Probability.CriticalSampledGenealogy
+public import Freezing2.Probability.CriticalGenealogyLaw
+public import Freezing2.Probability.CriticalDistanceLimit
+public import Freezing2.Probability.CriticalScalingLimit
+public import Freezing2.Geometry.RealTree
+public import Freezing2.Geometry.GHRealTree
+public import Freezing2.Probability.CriticalRealTree
+public import Freezing2.Geometry.RealTreeDegree
+public import Freezing2.Probability.CriticalMergeAtoms
+public import Freezing2.Probability.CriticalLeaves
+public import Freezing2.Probability.GHPTightness
+public import Freezing2.Probability.SampledDistanceLaw
+public import Freezing2.Probability.SampledDistanceContinuity
+public import Freezing2.Probability.SampledCoverRadius
+public import Freezing2.Geometry.CompactMeasuredRepresentation
+public import Freezing2.Probability.SampledCoverRadiusContinuity
+public import Freezing2.Probability.CoverRadiusSupport
+public import Freezing2.Probability.ContinuousCoalescentHazard
+public import Freezing2.Probability.ContinuousCoalescentEndpoint
+public import Freezing2.Probability.ContinuousCoalescentKernel
+public import Freezing2.Probability.ContinuousCoalescentSurvival
+public import Freezing2.Geometry.RealTreeStar
+public import Freezing2.Probability.CriticalTripleMerger
+public import Freezing2.Probability.CriticalRootMerges
+public import Freezing2.Probability.CriticalBranching
+public import Freezing2.MainResults.BoundedPopulation
+public import Freezing2.Probability.CoalescentDensity
+public import Freezing2.MainResults.SupercriticalNonTight
+public import Freezing2.Probability.CoalescentDecoding
+public import Freezing2.MainResults.RecursiveTrees
+public import Freezing2.Probability.CoalescentForests
+public import Freezing2.Probability.CriticalLocalLimit
+public import Freezing2.Probability.CriticalLocalLimitPlane
+public import Freezing2.MainResults.BoundedPopulationMeasure
+public import Freezing2.MainResults.RecursiveNoLimit
+public import Freezing2.Audit.ExcursionCounterexamples
+public import Freezing2.Geometry.GromovProkhorov
+public import Freezing2.Probability.GPGHtoGHP
+public import Freezing2.Probability.GPMatrixCharacterization
+public import Freezing2.MainResults.ModelFacts
+public import Freezing2.MainResults.UniformPlaneTree
+public import Freezing2.Interface.Defs
+public import Freezing2.Interface.BridgeModel
+public import Freezing2.Interface.BridgeGHP
+public import Freezing2.Interface.Statements
+
+/-!
+# Uniform attachment with freezing: Scaling limits
+
+Entry point for the integrated proof development. The default `lake build`
+checks this import closure; unfinished draft modules remain outside it and
+are listed explicitly by the integrated axiom checker.
+
+The current exports include the actual reverse history, its conditional height
+increments and corrected coalescence law, uniform distance approximation,
+subcritical coalescence estimate, uniform birth-time limit, Bennett's inequality,
+all five parts of the population-profile lemma, and the Introduction's forward
+height scaling theorem, the complete forward/reverse law equality, and the
+corrected forward supercritical root-inclusive distance-matrix limit. The
+forward subcritical measured-tree limit is proved in the exact GHP topology
+on whole-space measured-isometry classes. The critical one-point covering
+estimate `tightness time estimate`, the sample-net tightness `eq:stepone` and
+the leaf-tightness `eq:GH` are proved for actual iid samples (also for the
+forward tree), the leaf-tightness criterion `C.1` is proved, together
+with GHP tightness, sampled-distance continuity and continuous coalescent clock
+foundations. The critical tree limit `thm:critique` (a random compact real tree)
+and its properties `thm:properties` (leaves carry the mass; binary branching iff
+the reciprocal-square integral diverges, root condensation otherwise) are proved.
+The CRT corollary and general topology obligations remain in scope. See
+`FORMALIZATION_REPORT.md` for exact source coverage and outstanding obligations.
+-/
