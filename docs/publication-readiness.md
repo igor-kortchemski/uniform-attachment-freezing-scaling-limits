@@ -1,8 +1,7 @@
 # Publication readiness
 
-Status on 30 October 2026: **pushed to a private GitHub repository; CI and
-the sandboxed Comparator pass. Not yet public, Palomar-preflighted or
-submitted.**
+Status on 30 October 2026: **public on GitHub; CI and the sandboxed
+Comparator pass. Not yet Palomar-preflighted or submitted.**
 
 ## Decisions recorded (from the user, 30 October 2026)
 
@@ -11,7 +10,7 @@ submitted.**
   proofs only; the library and `Solution.lean` keep the no-`sorry` policy.
 - The CRT corollary M05 is excluded from the advertised scope and documented.
 - GitHub destination: `igor-kortchemski/uniform-attachment-freezing-scaling-limits`,
-  pushed privately first and made public after CI passes.
+  pushed privately first and made public on 30 October 2026 after CI passed.
 - The source manuscript stays in the repository (the user's decision as an
   author; its rights are reserved in NOTICE).
 
@@ -58,6 +57,12 @@ submitted.**
   own binary.
 - Both jobs then ran in `ci.yml`; the `comparator` job has since moved
   unchanged to its own workflow, `comparator.yml`, so that it has its own badge.
+- Some later runs died with "No space left on device" during the build; both
+  workflows now free runner disk space first. On commit `fa1fb7d`, CI
+  ([run 41038286965](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41038286965))
+  and the sandboxed Comparator
+  ([run 41038286898](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41038286898))
+  both pass.
 - This is a standalone Comparator check, not the Palomar full preflight.
 
 ## Policy checked (30 October 2026)
@@ -73,7 +78,7 @@ submitted.**
 
 1. Done: pushed to the private repository; CI and the sandboxed Comparator
    pass.
-2. Make the repository public.
+2. Done: the repository is public.
 3. Refresh the Palomar pipeline commit pinned in `palomar.yml`, dispatch the
    full preflight on the exact public commit, and inspect its report.
 4. Decide on submission; registration is a separate decision after review.
