@@ -25,9 +25,10 @@ submitted.**
 - [comparator.json](../comparator.json), [formalization.yaml](../formalization.yaml)
   (schema v0.4), [LICENSE](../LICENSE), [NOTICE](../NOTICE),
   [CITATION.cff](../CITATION.cff), and the workflows
-  [ci.yml](../.github/workflows/ci.yml) (build, axioms, Challenge check,
-  sandboxed Comparator) and [palomar.yml](../.github/workflows/palomar.yml)
-  (manual full preflight).
+  [ci.yml](../.github/workflows/ci.yml) (build, axioms, Challenge check),
+  [comparator.yml](../.github/workflows/comparator.yml) (sandboxed
+  Comparator) and [palomar.yml](../.github/workflows/palomar.yml) (manual full
+  preflight).
 - Pinned Lean/Mathlib v4.35.0 and the committed manifest; one Lakefile; every
   Lean file is a `module` with at most 10,000 lines.
 
@@ -52,8 +53,11 @@ submitted.**
   bubblewrap 0.12.0 built by Palomar's pinned `install_bwrap.sh`, accepted the
   solution ([record](../evidence/comparator-ci-sandboxed.txt)).
 - The first run failed before comparing anything: the distribution's `bwrap`
-  cannot create user namespaces on Ubuntu 24.04 runners. `ci.yml` now uses
-  Palomar's installer, which loads an AppArmor profile for its own binary.
+  cannot create user namespaces on Ubuntu 24.04 runners. The Comparator
+  workflow now uses Palomar's installer, which loads an AppArmor profile for its
+  own binary.
+- Both jobs then ran in `ci.yml`; the `comparator` job has since moved
+  unchanged to its own workflow, `comparator.yml`, so that it has its own badge.
 - This is a standalone Comparator check, not the Palomar full preflight.
 
 ## Policy checked (30 October 2026)

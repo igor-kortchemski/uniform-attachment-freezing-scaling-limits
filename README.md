@@ -1,11 +1,10 @@
 # Uniform attachment with freezing: Scaling limits
 
 [![CI](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/workflows/ci.yml?query=branch%3Amain)
-[![Comparator](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/workflows/ci.yml?query=branch%3Amain)
+[![Comparator](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/workflows/comparator.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/workflows/comparator.yml?query=branch%3Amain)
 
-> Both badges show the single `ci.yml` workflow, whose `build` job builds the
-> library and checks axioms and whose `comparator` job runs the sandboxed
-> Comparator; they are not separate signals.
+**CI** builds the library and runs the axiom and Challenge checks;
+**Comparator** runs the sandboxed comparison of `Challenge` and `Solution`.
 
 This repository is a Lean 4 and Mathlib formalization of
 [arXiv:2308.00484](https://arxiv.org/abs/2308.00484), *Uniform attachment with
