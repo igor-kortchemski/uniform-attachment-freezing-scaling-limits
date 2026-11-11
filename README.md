@@ -3,105 +3,68 @@
 [![CI](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/workflows/ci.yml?query=branch%3Amain)
 [![Comparator](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/workflows/comparator.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/workflows/comparator.yml?query=branch%3Amain)
 
-**CI** builds the library and runs the axiom and Challenge checks;
-**Comparator** runs the sandboxed comparison of `Challenge` and `Solution`.
-
-This repository is a Lean 4 and Mathlib formalization of
-[arXiv:2308.00484](https://arxiv.org/abs/2308.00484), *Uniform attachment with
-freezing: Scaling limits* by Étienne Bellin, Arthur Blanc-Renaudie, Emmanuel
-Kammerer and Igor Kortchemski, published in Ann. Inst. H. Poincaré Probab.
-Statist. **61**(4) 2679–2708 (2025),
+A Lean 4 and Mathlib formalization of *Uniform attachment with freezing: Scaling
+limits* ([arXiv:2308.00484](https://arxiv.org/abs/2308.00484)) by Étienne Bellin,
+Arthur Blanc-Renaudie, Emmanuel Kammerer and Igor Kortchemski, Ann. Inst. H.
+Poincaré Probab. Statist. **61**(4) 2679–2708 (2025),
 [doi:10.1214/24-AIHP1497](https://doi.org/10.1214/24-AIHP1497).
+**The five main statements below are proved for the actual random trees, using
+only the axioms `propext`, `Classical.choice` and `Quot.sound`, with no `sorry`
+outside the deliberate placeholders of `Challenge.lean`; the CRT corollary is not
+formalized.**
 
-## What is proved
+Statements: [Challenge.lean](Challenge.lean) · Correspondence record:
+[FORMALIZATION_REPORT.md](FORMALIZATION_REPORT.md) · Verification: [Verify](#verify)
 
-For the actual random trees $\mathcal T_n$ of uniform attachment with freezing,
-the main statements are restated with Mathlib-only definitions in
-[Challenge.lean](Challenge.lean) and proved in the library (via
-[Solution.lean](Solution.lean)); [comparator.json](comparator.json) lists them:
+## Main results
 
-| Challenge theorem | Source | Statement |
+A sign sequence $X^n\in\{-1,1\}^n$ drives a random tree $\mathcal T_n$: at step
+$i$, a uniform active vertex receives a new active child if $X^n_i=1$ and is
+frozen otherwise. The number $S^n_k=1+\sum_{i\le k}X^n_i$ of active vertices is
+assumed positive up to time $n$, and $n^\alpha/S^n_{\lfloor nt\rfloor}$ converges
+to $1/f(t)$ in the sense of the paper's hypotheses $(\mathsf{Lim}^\alpha_{1/f})$
+and, where needed, $(\mathsf{Lim}^\alpha_{1/f^2})$. The theorems are in the
+namespace `FreezingStatements` and are listed in [comparator.json](comparator.json).
+
+| Paper result | Lean statement | Statement |
 | --- | --- | --- |
-| `height_scaling_limit` | `thm:heightalpha` (M01) | For $0<\alpha<1$, $\mathrm{Height}(\mathcal T_n)/n^{1-\alpha}\to\int_0^1\frac{dt}{2f(t)}$ in $L^p$ for every $p\ge1$. |
-| `subcritical_scaling_limit` | `thm:sous-critique` (M02) | For $0<\alpha<1/2$, $\mathcal T_n/n^{1-\alpha}$ with its uniform measure converges in GHP distribution to the segment $[0,\int_0^1\frac{dt}{2f(t)}]$ carrying the image of the uniform measure on $[0,1]$ under $t\mapsto\int_0^t\frac{ds}{2f(s)}$. |
-| `critical_scaling_limit` | `thm:critique` + `thm:properties` (M03, M04) | For $\alpha=1/2$ and $\max_k S_k^n=O(\sqrt n)$, $\mathcal T_n/\sqrt n$ converges in GHP distribution to a random tree $\mathcal T(f)$ depending only on $f$; almost surely $\mathcal T(f)$ is a compact real tree whose measure has full support and charges only leaves, it is binary if and only if $\int_0^{1/2}f^{-2}=\infty$, and otherwise it has a point of infinite degree, all other branch points having degree three. |
-| `supercritical_distance_matrix_limit` | `thm:sur-critique` (M06) | For $1/2<\alpha<1$, the root-inclusive distance matrix of $k$ uniform vertices, divided by $n^{1-\alpha}$, converges in law to the star matrix (with the zero diagonal correction approved by the user). |
-| `bounded_population_GH_limit` | `thm:alpha0` (N09) | With bounded population, $\mathcal T_n/h_n^+\to[0,1]$ in probability for the Gromov–Hausdorff distance. |
+| `thm:heightalpha` (M01) | [`height_scaling_limit`](Challenge.lean#L342) | For $0<\alpha<1$, $\mathrm{Height}(\mathcal T_n)/n^{1-\alpha}\to\int_0^1\frac{dt}{2f(t)}$ in $L^p$ for every $p\ge1$. |
+| `thm:sous-critique` (M02) | [`subcritical_scaling_limit`](Challenge.lean#L358) | For $0<\alpha<1/2$, $\mathcal T_n/n^{1-\alpha}$ with its uniform measure converges in GHP distribution to the segment $[0,\int_0^1\frac{dt}{2f(t)}]$ carrying the image of the uniform measure on $[0,1]$ under $u\mapsto\int_0^u\frac{dt}{2f(t)}$. |
+| `thm:critique` + `thm:properties` (M03, M04) | [`critical_scaling_limit`](Challenge.lean#L382) | For $\alpha=1/2$ and $\max_k S_k^n=O(\sqrt n)$, $\mathcal T_n/\sqrt n$ converges in GHP distribution to a random tree $\mathcal T(f)$ depending only on $f$; almost surely $\mathcal T(f)$ is a compact real tree whose measure has full support and charges only leaves, it is binary if and only if $\int_0^{1/2}f^{-2}=\infty$, and otherwise it has a point of infinite degree, all other branch points having degree three. |
+| `thm:sur-critique` (M06), corrected | [`supercritical_distance_matrix_limit`](Challenge.lean#L409) | For $1/2<\alpha<1$ and every $k$, the distance matrix of the root $V_0$ and $k$ uniform vertices $V_1,\dots,V_k$, divided by $n^{1-\alpha}$, converges in law to $\big(\mathbf 1_{i\ne j}\,(\int_0^{U_i}\frac{dt}{2f}+\int_0^{U_j}\frac{dt}{2f})\big)_{0\le i,j\le k}$, where $U_0=0$ and $U_1,\dots,U_k$ are independent uniform on $[0,1]$. |
+| `thm:alpha0` (N09) | [`bounded_population_GH_limit`](Challenge.lean#L421) | If $S^n_k\le M$ for all $k\le n$, then $\mathcal T_n/h_n^+\to[0,1]$ in probability for the Gromov–Hausdorff distance, where $h_n^+=\sum_{i\le n}\mathbf 1_{\{X^n_i=1\}}/S^n_i$. |
 
-All numbered results N01–N17 and most unnumbered claims of the paper are also
-proved in the library, several in corrected or qualified forms. **The CRT
-corollary (`cor:CRT`, M05) is not formalized**: it needs Brownian excursion and
-CRT theory, invariance principles, Skorokhod representation and random-walk local
-limit theorems that are absent from Mathlib, and two printed estimates of its
-proof are refuted in Lean ([Audit/ExcursionCounterexamples.lean](Freezing2/Audit/ExcursionCounterexamples.lean)).
-Also open: the dimension lower bounds (no proof in the source), long-dendron
-convergence and Aldous's time change. The
-[formalization report](FORMALIZATION_REPORT.md) maps every result to the paper,
-records each correction and proof-route difference, and lists what remains; the
-[statement interface](docs/statement-interface.md) explains each Challenge
-encoding (in particular, the GHP topology is put on compact measured spaces
-rather than on their isometry classes, so $\mathcal T(f)$ is unique only up to
-isometry). The [inventory](docs/source-inventory.md) and a
-[whole-source omission scan](docs/omission-scan-2026-10-30.md) record coverage.
-No whole-paper completion is claimed.
+The printed `thm:sur-critique` lacks the indicator $\mathbf 1_{i\ne j}$ and is
+false on the diagonal; the height theorem holds without
+$(\mathsf{Lim}^\alpha_{1/f^2})$. All numbered results N01–N17 and most unnumbered
+claims are also proved, several in corrected or qualified forms (23 source issues
+S01–S23 in the [inventory](docs/source-inventory.md#source-issues-requiring-explicit-treatment);
+[manuscript recommendations](MANUSCRIPT_RECOMMENDATIONS.md)). The GHP topology is
+put on compact measured spaces rather than on their isometry classes, so
+$\mathcal T(f)$ is unique only up to isometry ([statement interface](docs/statement-interface.md)).
 
-## Read the development
+**Not formalized:** the CRT corollary (`cor:CRT`, M05), which needs Brownian
+excursion and CRT theory, invariance principles, Skorokhod representation and
+random-walk local limit theorems absent from Mathlib (two printed estimates of its
+proof are [refuted in Lean](Freezing2/Audit/ExcursionCounterexamples.lean)); the
+dimension lower bounds (no proof in the source); long-dendron convergence; and
+Aldous's time change. No whole-paper completion is claimed. The
+[report](FORMALIZATION_REPORT.md) maps every result to the paper and records
+proof-route differences; a [whole-source omission scan](docs/omission-scan-2026-10-30.md)
+records coverage.
 
-Start with [Challenge.lean](Challenge.lean) for the main statements, then [Freezing2/Interface/Statements.lean](Freezing2/Interface/Statements.lean), which derives them from the library; [Freezing2.lean](Freezing2.lean) imports every maintained module.
+## Where to start
 
-| Module | Content |
-| --- | --- |
-| [Walk](Freezing2/Discrete/Walk.lean) | Signed paths, counts, survival, and faithful natural-number representation |
-| [Labels](Freezing2/Discrete/Labels.lean) | Disjoint vertex labels, birth times, actual uniform measure, `uniformVertex_birth_lt_before_extinction` |
-| [WeightedWalk](Freezing2/Discrete/WeightedWalk.lean) | Exact harmonic and coalescence weighted balances |
-| [Estimates](Freezing2/Discrete/Estimates.lean) | Specialization to the paper's surviving signed paths and uniform logarithmic boundary bound |
-| [Bennett](Freezing2/Probability/Bennett.lean) | Both strict concentration tails and absolute deviation, derived from exact Bernoulli MGFs |
-| [BennettFunction](Freezing2/Analysis/BennettFunction.lean) | Positivity and monotonicity of Bennett's rate function |
-| [ExponentialDecay](Freezing2/Analysis/ExponentialDecay.lean) | Polynomial versus stretched-exponential and geometric decay |
-| [SourceHypotheses](Freezing2/Analysis/SourceHypotheses.lean) | Source profile conventions and sublinear population, N06(i) |
-| [SignMeasures](Freezing2/Analysis/SignMeasures.lean) | Weak convergence of both empirical sign measures, N06(ii) |
-| [HarmonicConclusions](Freezing2/Analysis/HarmonicConclusions.lean) | Harmonic asymptotic equivalences and the uniform interval maximum, N06(iii–iv) |
-| [LocalSquareProfiles](Freezing2/Analysis/LocalSquareProfiles.lean) | Equivalence of the source's local square-moment and squared-$L^1$ hypotheses |
-| [InteriorMinimumLimit](Freezing2/Analysis/InteriorMinimumLimit.lean) | Interior minimum growth needed by N06(v) |
-| [PopulationLemma](Freezing2/Analysis/PopulationLemma.lean) | All five parts of the population-profile lemma in source notation |
-| [Height](Freezing2/MainResults/Height.lean) | Introduction height theorem for the actual forward tree law |
-| [SubcriticalDistribution](Freezing2/MainResults/SubcriticalDistribution.lean) | Actual forward subcritical measured-tree convergence in the GHP topology |
-| [Supercritical](Freezing2/MainResults/Supercritical.lean) | Corrected root-inclusive forward supercritical matrix limit |
-| [CriticalRealTree](Freezing2/Probability/CriticalRealTree.lean) | Critical GHP limit to a random compact measured real tree, M03 |
-| [CriticalLeaves](Freezing2/Probability/CriticalLeaves.lean) | The limit's mass measure charges only leaves, M04a |
-| [CriticalBranching](Freezing2/Probability/CriticalBranching.lean) | Binary criterion and infinite-degree point (unpointed), M04b–c |
-| [BoundedPopulation](Freezing2/MainResults/BoundedPopulation.lean) | Bounded-population GH limit to a segment, N09 |
-| [BoundedPopulationMeasure](Freezing2/MainResults/BoundedPopulationMeasure.lean) | GHP nonuniversality for bounded populations, U20 (new formulation) |
-| [RecursiveNoLimit](Freezing2/MainResults/RecursiveNoLimit.lean) | Recursive trees have no nondegenerate GHP limit, U04b (S19-qualified) |
-| [SupercriticalNonTight](Freezing2/MainResults/SupercriticalNonTight.lean) | Supercritical GHP non-tightness, U04b (S08-corrected) |
-| [ReversePaper](Freezing2/Probability/ReversePaper.lean) | Actual conditional increments in original labels, including extinction |
-| [CoalescenceHistory](Freezing2/Probability/CoalescenceHistory.lean) | Corrected exact coalescence distribution for distinct vertices |
-| [DistanceApproximation](Freezing2/Probability/DistanceApproximation.lean) | Uniform approximation of actual reverse-tree distances |
-| [SubcriticalCoalescenceLaw](Freezing2/Probability/SubcriticalCoalescenceLaw.lean) | Uniform maximum coalescence delay is sublinear |
-| [BirthTimeLimit](Freezing2/Probability/BirthTimeLimit.lean) | Actual normalized birth measures converge weakly to uniform measure |
-| [BranchLengthLimit](Freezing2/Probability/BranchLengthLimit.lean) | Actual scalar and fixed-$k$ iid harmonic branch limits |
-| [SupercriticalCoalescenceLaw](Freezing2/Probability/SupercriticalCoalescenceLaw.lean) | Actual iid sampled coalescence time is sublinear |
-| [SubcriticalDistanceApproximation](Freezing2/Probability/SubcriticalDistanceApproximation.lean) | Uniform graph-distance approximation under harmonic coordinates |
-| [SubcriticalGHLimit](Freezing2/Probability/SubcriticalGHLimit.lean) | Actual reverse-tree GH convergence to the source segment |
-| [ForwardTerminalLaw](Freezing2/Probability/ForwardTerminalLaw.lean) | Exact masses on the fixed schedule's reachable terminal support |
-| [CoalescentForests](Freezing2/Probability/CoalescentForests.lean) | Continuous coalescent forest density in source form, N11 |
-| [CriticalLocalLimitPlane](Freezing2/Probability/CriticalLocalLimitPlane.lean) | Corrected local limit in tracked-chain form, N12a |
-| [CriticalGenealogyLaw](Freezing2/Probability/CriticalGenealogyLaw.lean) | Convergence of sampled birth and coalescence times, N12b |
-| [CriticalSampledCover](Freezing2/Probability/CriticalSampledCover.lean) | Tightness time estimate with repaired constants, N13 |
-| [OneStepTightnessAsymptotic](Freezing2/Probability/OneStepTightnessAsymptotic.lean) | One-block tightness estimate for positive block indices, N14 |
-| [GPMatrixCharacterization](Freezing2/Probability/GPMatrixCharacterization.lean) | GP convergence iff convergence of sampled distance matrices, N15 |
-| [GPGHtoGHP](Freezing2/Probability/GPGHtoGHP.lean) | GP plus GH weak convergence gives GHP weak convergence, N16 |
-| [SampledReconstruction](Freezing2/Probability/SampledReconstruction.lean) | Leaf-tightness criterion `C.1`, N17 |
-| [GromovProkhorov](Freezing2/Geometry/GromovProkhorov.lean) | Polish Gromov–Prokhorov space and the GHP-to-GP projection |
-| [Obstructions](Freezing2/Audit/Obstructions.lean) | Zero-diagonal correction, distributional obstruction, and other precise source issues |
-| [ExcursionCounterexamples](Freezing2/Audit/ExcursionCounterexamples.lean) | Lean refutations of the printed CRT estimates S15 and S16 |
+- [Challenge.lean](Challenge.lean): the five statements and their definitions,
+  readable without installing Lean.
+- [Interface/Statements.lean](Freezing2/Interface/Statements.lean) derives them
+  from [Height](Freezing2/MainResults/Height.lean), [SubcriticalDistribution](Freezing2/MainResults/SubcriticalDistribution.lean),
+  [CriticalRealTree](Freezing2/Probability/CriticalRealTree.lean), [CriticalBranching](Freezing2/Probability/CriticalBranching.lean),
+  [Supercritical](Freezing2/MainResults/Supercritical.lean) and [BoundedPopulation](Freezing2/MainResults/BoundedPopulation.lean).
+- [Freezing2.lean](Freezing2.lean) imports all 289 library modules, directly or
+  transitively; the [module map](docs/MODULES.md) describes the main ones.
 
-The corrected supercritical candidate matrix has zero diagonal and retains the
-sum of branch lengths off the diagonal, as authorized by the user. Its root-inclusive scaling limit is proved for the actual forward tree,
-with the source normalization and limiting branch laws. See [manuscript recommendations](MANUSCRIPT_RECOMMENDATIONS.md)
-for this and other source defects; the supplied TeX is unchanged.
-
-## Verify locally
+## Verify
 
 Install Elan following the [Lean project setup guide](https://leanprover-community.github.io/install/project.html),
 then open this folder in VS Code with the Lean extension. Lean and Mathlib are
@@ -118,44 +81,44 @@ python3 scripts/check_challenge.py
 lake comparator --config comparator.json   # Linux, requires bubblewrap
 ```
 
-`lake build` builds the library, `Challenge` and `Solution`; the only warnings
-are the five deliberate `sorry` placeholders of `Challenge.lean`, which states
-the theorems and is never imported by the library or by `Solution`.
-`check_axioms.py` inspects the transitive axioms of every module under
-`Freezing2/` and accepts only `propext`, `Classical.choice` and `Quot.sound`.
-`check_challenge.py` checks that `Challenge.lean` copies the shared definitions
-of [Freezing2/Interface/Defs.lean](Freezing2/Interface/Defs.lean) verbatim and
-meets Palomar's size limits. Comparator then checks that `Solution` proves
-exactly the `Challenge` statements with only those three axioms.
+`lake build` warns only about the five `sorry` placeholders of `Challenge.lean`,
+which neither the library nor `Solution` imports. `check_axioms.py` accepts only
+the three axioms above as transitive axioms of every module under `Freezing2/`;
+`check_challenge.py` checks that `Challenge.lean` copies
+[Defs.lean](Freezing2/Interface/Defs.lean) verbatim and meets Palomar's size
+limits; Comparator checks that `Solution` proves exactly the `Challenge`
+statements with only those axioms.
 
-Local evidence for the current candidate
-([context and hashes](evidence/publication-candidate-context.txt)): `lake build`
-4,177 jobs; the axiom check passed for 3,724 definitions and theorems in all
-289 modules ([log](evidence/publication-candidate-axioms.log)); the Challenge
-check passed; and a **preliminary, unsandboxed** local Comparator run accepted
-the solution ([output](evidence/comparator-local-unsandboxed.txt)).
+On 30 October 2026, on commit `8bace72`, the
+[CI workflow](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41041088018)
+(build, axiom and Challenge checks) and the sandboxed
+[Comparator workflow](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41041088024)
+passed, and a manually dispatched
+[Palomar full mechanical preflight](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41041877221)
+succeeded; that workflow does not submit or register a result. The local check of
+the same Lean sources ([hashes](evidence/publication-candidate-context.txt)) built
+4,177 jobs and passed the axiom check for 3,724 definitions and theorems in 289
+modules ([log](evidence/publication-candidate-axioms.log)) and the Challenge check
+([log](evidence/publication-candidate-challenge-check.log)); an earlier sandboxed
+Comparator run in CI (commit `41aa125`) is [recorded](evidence/comparator-ci-sandboxed.txt).
 
-In CI on GitHub ([run 41033233038](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41033233038),
-commit `41aa125`), the build, axiom and Challenge checks passed again, and the
-**sandboxed** Comparator (bubblewrap 0.12.0, built by Palomar's pinned installer)
-accepted the solution ([record](evidence/comparator-ci-sandboxed.txt)). No
-Palomar preflight, submission or registration has taken place.
+## How it was made
 
-## Source, citation, and contribution
+The development was produced with Codex and Claude Code agents, using Lean,
+Mathlib and source-file search; model build identifiers are not recorded. Each
+advertised statement and its definitions were compared with the source by a
+separate agent that did not write them ([review log](docs/milestone-audit.md)),
+and an agent carried out the omission scan. No human line-by-line review of the
+proofs and no human peer review is claimed.
 
-The audited source is [attachement-uniforme-2-final.tex](attachement-uniforme-2-final.tex)
-(SHA-256 recorded in the report). Cite the paper for its mathematics,
-[DOI 10.1214/24-AIHP1497](https://doi.org/10.1214/24-AIHP1497); see
-[CITATION.cff](CITATION.cff) and [CITATION.bib](CITATION.bib). The citation does
-not assign the paper's authors authorship or endorsement of the Lean code.
+## License and citation
 
-The code and documentation are licensed under [Apache-2.0](LICENSE); see
-[NOTICE](NOTICE). The manuscript retains its own rights. The modules under
-`Freezing2/Companion` are adapted from the companion formalization of *Uniform
-attachment with freezing* by the same contributor
-([provenance](docs/companion-provenance.md)). The development was produced with
-Codex and Claude agents; statement fidelity was checked by separate automated
-reviewers ([audit log](docs/milestone-audit.md)). No human peer review is claimed.
-Maintainer: Igor Kortchemski. Issues and pull requests are welcome; please keep
-the pinned toolchain, avoid new axioms or `sorry` outside `Challenge.lean`, and
-update the report and run the checks above.
+Code and documentation: [Apache-2.0](LICENSE), see [NOTICE](NOTICE); the license
+does not cover the paper's TeX source [attachement-uniforme-2-final.tex](attachement-uniforme-2-final.tex).
+`Freezing2/Companion` is adapted from the companion formalization of *Uniform
+attachment with freezing* by the same contributor ([provenance](docs/companion-provenance.md)).
+Cite the paper for its mathematics ([CITATION.cff](CITATION.cff),
+[CITATION.bib](CITATION.bib)); the citation does not assert that its authors wrote
+or endorse the Lean code. Maintainer: Igor Kortchemski. Issues and pull requests are
+welcome: keep the pinned toolchain, add no axioms or `sorry` outside
+`Challenge.lean`, update the report, and run the checks above.

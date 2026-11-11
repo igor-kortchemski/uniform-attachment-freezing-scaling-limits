@@ -17,6 +17,5 @@ The modules under Freezing2/Companion are adapted from the companion Lean
 formalization of "Uniform attachment with freezing" by the same contributor,
 under the same license; see docs/companion-provenance.md.
 
-The local workflow skills under .agents retain their notices and licenses in
-.agents/skill-notices/. Mathlib and other dependencies retain the licenses in
-their respective repositories.
+Mathlib and other dependencies retain the licenses in their respective
+repositories.

@@ -16,7 +16,7 @@ the Introduction's results. No claims have been excluded to make the project
 appear complete. The source has 1,921 lines and SHA-256
 `23a485d5a5dfaca01a05db28377d015fb1456c194a543d0cbf56f77619ad0cbf`.
 
-**This is an incomplete formalization, not a verified publication candidate.**
+**This is an incomplete formalization of the paper.**
 The Introduction’s height theorem M01, subcritical GHP limit M02, and corrected supercritical matrix theorem M06 are proved. The critical tree limit M03 is proved: `critical_scaling_limit_realTree` gives Gromov–Hausdorff–Prokhorov convergence of the actual scaled forward trees to `criticalTreeLaw (1/f)`, a law depending only on $f$, of an almost surely fully supported random compact measured **real tree** (standard definition, U26). Its properties `thm:properties` are proved (`critical_tree_properties`): the mass measure charges only leaves (M04a); the tree is binary if and only if $\int_0^{1/2}f^{-2}=\infty$ (M04b); and otherwise some point has infinite degree while all other branch points have degree three (M04c, unpointed form). The CRT corollary M05 remains unproved; it depends on external mathematics absent from the pinned Mathlib and the companion project (see [docs/coverage-gaps.md](docs/coverage-gaps.md)). Every other named result environment now has a proved Lean counterpart, in the qualified forms recorded in the table below: all numbered results N01–N17 are proved, with N04 for distinct vertices (S02), N11 in source form under the S09 root-order interpretation, N12a in corrected tracked-chain form (S10), N12b in an equivalent form, N13 with repaired constants (S12), N14 for positive block indices (S11), and N15 by a route different from the cited one. Among the unnumbered claims, the first clause of U01, U04b's supercritical non-tightness (S08-corrected) and recursive-tree clause (S19-qualified), U20's nonuniversality (new formulation), U23 (in law), U25–U26, U31, U32 (leaf-tightness `eq:GH` and its transfer only; the intermediate displays `16/01/11h` and `eq:delta` are bypassed), U36–U39, U40 (without the source's "root degree one" clause, which needs a pointed limit), U41, and the GP space of U49/E09 (with S18 as a projection) are proved, and the false displays S15 and S16 are refuted in Lean. The remaining obligations are listed in the final section. The independent initial
 [source inventory](docs/source-inventory.md) records all **23 named result
 environments**, multipart obligations, 58 groups of substantive claims (U53–U58
@@ -27,9 +27,8 @@ obligation not explicitly discharged here remains unresolved.
 
 Lean and Mathlib remain pinned to **v4.35.0**, with the original
 `lake-manifest.json`. The entry point is [Freezing2.lean](Freezing2.lean).
-The selected destinations are **GitHub and Palomar**, for local preparation;
-no remote publication or registry submission has been performed. The previous
-“destination not selected” setup note is superseded by the user's request.
+The repository is public on GitHub; its verification status is given at the
+end of this report.
 
 On 29 October 2026 the user authorized a **zero-diagonal correction** to M06,
 `thm:sur-critique`: preserve the sum of branch lengths when $i\ne j$, set it to
@@ -326,7 +325,7 @@ replacement estimate is needed; independent review: PASS with notes.
 
 ## Verification and review
 
-Work resumed on 29 October 2026 from [HANDOFF_CLAUDE.md](HANDOFF_CLAUDE.md).
+Work resumed on 29 October 2026.
 The two remaining N13 elaboration errors were repaired, the literal $O(\sqrt n)$
 population bridge was added, and the failing continuous-kernel draft and its
 survival consumer were repaired. All 232 maintained modules were then imported by
@@ -377,8 +376,8 @@ accepted the solution. See [publication-candidate-axioms.log](evidence/publicati
 [comparator output](evidence/comparator-local-unsandboxed.txt). In GitHub CI
 ([run 41033233038](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41033233038),
 commit `41aa125`) the same checks passed and the **sandboxed** Comparator
-accepted the solution ([record](evidence/comparator-ci-sandboxed.txt)). No
-Palomar preflight, submission or registration has taken place.
+accepted the solution ([record](evidence/comparator-ci-sandboxed.txt)). Later
+runs are listed at the end of this report.
 
 The previous checkpoint, after U01's second clause (uniform plane tree) and the
 model facts U06, U29 (normalization) and U20 ($L^p$ height), ran the default
@@ -614,9 +613,9 @@ reviews now cover the population-profile interfaces and their affected dependenc
 [the milestone audit](docs/milestone-audit.md) records both source correspondence
 and substantive departures. No whole-paper completion claim is made.
 
-These are local checks using the pinned installed dependencies. A fresh public
-checkout, Linux Comparator, independent kernel replay, and full Palomar preflight
-have **not** been verified.
+These are local checks using the pinned installed dependencies. The GitHub CI,
+sandboxed Comparator and Palomar preflight runs of the publication candidate are
+listed at the end of this report.
 
 The reproducible local check is:
 
@@ -627,7 +626,8 @@ python3 scripts/check_axioms.py
 It runs `lake build`, then queries transitive axioms of all explicit definitions
 and theorems in the maintained modules. Only `propext`, `Classical.choice`, and
 `Quot.sound` are permitted. This does not replace Comparator or Palomar's full
-mechanical verification. There are no deliberate Challenge holes in this project.
+mechanical verification. `Challenge.lean`, whose five theorem proofs are
+deliberate `sorry` placeholders, lies outside this scan by design.
 
 During active development, `python3 scripts/check_axioms.py --integrated`
 checks only the entry point's local import closure and explicitly lists excluded
@@ -721,9 +721,13 @@ are:
    Repeat the scan if the source or the claimed coverage changes, and before
    any coverage claim.
 
-[Publication readiness](docs/publication-readiness.md) records the destination
-requirements and current blockers. There is no public repository commit,
-selected repository license, source-reviewed final Challenge/Solution pair,
-Comparator pass, full Palomar mechanical report, submission, or registration.
-A buildable partial library and complete-looking inventory must not be described
-as the requested verified publication candidate.
+Publication status: the repository is public under the Apache-2.0 license. On
+30 October 2026, on commit `8bace72`, the GitHub
+[CI workflow](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41041088018)
+(build, axiom check, Challenge check) and the sandboxed
+[Comparator workflow](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41041088024)
+passed, and a manually dispatched
+[Palomar full mechanical preflight](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/actions/runs/41041877221)
+succeeded. That workflow does not submit or register a result. The Lean sources
+of that commit match the hashes in
+[publication-candidate-context.txt](evidence/publication-candidate-context.txt).

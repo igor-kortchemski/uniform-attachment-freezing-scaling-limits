@@ -14,8 +14,9 @@ project:
     numbered intermediate results are proved, several in corrected or qualified
     forms. The CRT corollary (cor:CRT) is not formalized. Height and
     forward-tree modules are adapted from the companion formalization of
-    "Uniform attachment with freezing" by the same contributor (not yet public;
-    see docs/companion-provenance.md).
+    "Uniform attachment with freezing" by the same contributor
+    (https://github.com/igor-kortchemski/uniform-attachment-with-freezing; see
+    docs/companion-provenance.md).
   authors: [Igor Kortchemski]
   responsible_maintainers: [Igor Kortchemski]
   license: Apache-2.0
@@ -178,5 +179,4 @@ alignment:
         its proof (S15, S16) are refuted in Freezing2.Audit.ExcursionCounterexamples.
 acknowledgements: >-
   Lean, Mathlib and their contributors; source-paper authors; Codex and Claude
-  proof and audit assistance. Local workflow skills retain their bundled
-  attribution.
+  proof and audit assistance.

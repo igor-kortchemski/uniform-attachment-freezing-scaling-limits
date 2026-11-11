@@ -1,8 +1,8 @@
 # Independent source reviews at formalization milestones
 
 Date: 29 October 2026. This is an independent mathematical/source review by an
-agent that did not write the declarations reviewed here, using
-[lean-statement-audit](../.agents/skills/lean-statement-audit/SKILL.md).
+agent that did not write the declarations reviewed here, using the
+`lean-statement-audit` review procedure.
 The review is scoped to the modules below and their source-facing dependencies.
 It is not independent kernel replay or a whole-paper completion review.
 
