@@ -13,6 +13,10 @@ only the axioms `propext`, `Classical.choice` and `Quot.sound`, with no `sorry`
 outside the deliberate placeholders of `Challenge.lean`; the CRT corollary is not
 formalized.**
 
+Registered as **[PALOMAR-2026-10-30-000012, version 1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-30-000012&version=1)**
+for the five main statements; the registered snapshot is commit
+[`8bace72`](https://github.com/igor-kortchemski/uniform-attachment-freezing-scaling-limits/commit/8bace72d36cdf7d250414f3d98acfaa415de23d9).
+
 Statements: [Challenge.lean](Challenge.lean) · Correspondence record:
 [FORMALIZATION_REPORT.md](FORMALIZATION_REPORT.md) · Verification: [Verify](#verify)
 
